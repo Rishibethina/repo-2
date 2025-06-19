@@ -1,5 +1,42 @@
 ---
-title: "Untitled"
+title: "A beautiful graphic"
+author: Rishi Bethina
 format: html
+execute:
+  echo: false
+  
 ---
 
+
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+library(tidyverse)
+
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = 1), 
+              color = "black", linetype = "dashed") +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "Engine Displacement vs. Highway MPG",
+    subtitle = "Larger engines generally have lower fuel efficiency",
+    x = "Engine Displacement (Liters)",
+    y = "Highway Miles Per Gallon",
+    color = "Vehicle Class",
+    caption = "Data from EPA | Tidyverse mpg dataset"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+    plot.caption = element_text(color = "gray60", face = "italic"),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold"),
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+```
